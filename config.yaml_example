@@ -1,2 +1,4 @@
 --- 
-server_uri: http://127.0.0.1:8080/taverna-server
+data : /some/directory/data.csv
+workflow : /some/directory/workflow.t2flow
+server_uri : http://127.0.0.1:8080/taverna-server

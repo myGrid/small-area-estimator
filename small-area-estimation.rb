@@ -42,6 +42,10 @@ require 't2server'
 $server = nil
 #the location of the server
 $server_uri = nil
+#the workflow to run
+$workflow = nil
+#the data used by the workflow
+$data = nil
 
 # Initalise Conneg
 use(Rack::Conneg) { |conneg|
@@ -59,9 +63,12 @@ end
 
 def check_server()
   if (!defined?($server) || ($server == nil)) then
-    settings = YAML.load(IO.read(File.join(File.dirname(__FILE__), "config.yaml")))
+    settings = YAML.load_file(File.join(Dir.getwd(), "config.yaml"))
     if settings
       $server_uri = settings['server_uri']
+      file = File.open(settings['workflow'], 'r')
+      $workflow = file.read
+      $data = settings['data']
       begin
        $server = T2Server::Server.connect($server_uri)
       rescue Exception => e  
@@ -82,14 +89,25 @@ end
 #or use taverna to create the results 
 get '/:area/:disability/:year' do
 check_server
+run = T2Server::Run.create($server,$workflow)
+run.set_input("disability", params[:disability])
+run.set_input("district_in", params[:area])
+run.set_input("year_in", params[:year])
+run.upload_input_file("data", $data)
+run.start
+run.wait
+#R/taverna returns results with leading/trailing [] so remove them
+disability_total = run.get_output("disab_tot")[1..-1].chop
+population_total = run.get_output("pop_tot")[1..-1].chop
+percentage = run.get_output("pct")[1..-1].chop
 respond_to do |wants|
          wants.xml   {
             content_type "application/xml"
-            builder :estimate, :locals => {:area => params[:area], :disability => params[:disability], :year => params[:year]}
+            builder :estimate, :locals => {:area => params[:area], :disability => params[:disability], :year => params[:year], :disab_total => disability_total, :pop_total => population_total, :percentage => percentage}
          }
          wants.html {
             content_type 'text/html'
-            haml :estimate, :locals => {:area => params[:area], :disability => params[:disability], :year => params[:year]}
+            haml :estimate, :locals => {:area => params[:area], :disability => params[:disability], :year => params[:year], :disab_total => disability_total, :pop_total => population_total, :percentage => percentage}
          }
          wants.other { 
            content_type 'text/plain'
