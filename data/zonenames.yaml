@@ -1,0 +1,460 @@
+---
+- Aberdeen City
+- Aberdeenshire
+- Adur
+- Allerdale
+- Alnwick
+- Amber Valley
+- Angus
+- Antrim
+- Ards
+- Argyll & Bute
+- Armagh
+- Arun
+- Ashfield
+- Ashford
+- Aylesbury Vale
+- Babergh
+- Ballymena
+- Ballymoney
+- Banbridge
+- Barking & Dagenham
+- Barking and Dagenham
+- Barnet
+- Barnsley
+- Barrow-in-Furness
+- Basildon
+- Basingstoke & Deane
+- Basingstoke and Deane
+- Bassetlaw
+- Bath & North East Somerset
+- Bath and North East Somerset
+- Bedford
+- Belfast
+- Berwick-upon-Tweed
+- Bexley
+- Birmingham
+- Blaby
+- Blackburn with Darwen
+- Blackpool
+- Blaenau Gwent
+- Blyth Valley
+- Bolsover
+- Bolton
+- Boston
+- Bournemouth
+- Bracknell Forest
+- Bradford
+- Braintree
+- Breckland
+- Brent
+- Brentwood
+- Bridgend
+- Bridgnorth
+- Brighton and Hove
+- Bristol, City of
+- Broadland
+- Bromley
+- Bromsgrove
+- Broxbourne
+- Broxtowe
+- Burnley
+- Bury
+- Caerphilly
+- Calderdale
+- Cambridge
+- Camden
+- Cannock Chase
+- Canterbury
+- Caradon
+- Cardiff
+- Carlisle
+- Carmarthenshire
+- Carrick
+- Carrickfergus
+- Castle Morpeth
+- Castle Point
+- Castlereagh
+- Ceredigion
+- Charnwood
+- Chelmsford
+- Cheltenham
+- Cherwell
+- Chester
+- Chester-le-Street
+- Chesterfield
+- Chichester
+- Chiltern
+- Chorley
+- Christchurch
+- City of London
+- Clackmannanshire
+- Colchester
+- Coleraine
+- Congleton
+- Conwy
+- Cookstown
+- Copeland
+- Corby
+- Cotswold
+- Coventry
+- Craigavon
+- Craven
+- Crawley
+- Crewe & Nantwich
+- Crewe and Nantwich
+- Croydon
+- Dacorum
+- Darlington
+- Dartford
+- Daventry
+- Denbighshire
+- Derby
+- Derbyshire Dales
+- Derry
+- Derwentside
+- Doncaster
+- Dover
+- Down
+- Dudley
+- Dumfries & Galloway
+- Dundee City
+- Dungannon
+- Durham
+- ENGLAND
+- Ealing
+- Easington
+- East Ayrshire
+- East Cambridgeshire
+- East Devon
+- East Dorset
+- East Dunbartonshire
+- East Hampshire
+- East Hertfordshire
+- East Lindsey
+- East Lothian
+- East Northamptonshire
+- East Renfrewshire
+- East Riding of Yorkshire
+- East Staffordshire
+- Eastbourne
+- Eastleigh
+- Eden
+- Edinburgh, City of
+- Eilean Siar
+- Ellesmere Port & Neston
+- Elmbridge
+- Enfield
+- Epping Forest
+- Epsom & Ewell
+- Epsom and Ewell
+- Erewash
+- Exeter
+- Falkirk
+- Fareham
+- Fenland
+- Fermanagh
+- Fife
+- Flintshire
+- Forest Heath
+- Forest of Dean
+- Fylde
+- Gateshead
+- Gedling
+- Glasgow City
+- Gloucester
+- Gosport
+- Gravesham
+- Great Yarmouth
+- Greenwich
+- Guildford
+- Gwynedd
+- Hackney
+- Halton
+- Hambleton
+- Hammersmith & Fulham
+- Hammersmith and Fulham
+- Harborough
+- Haringey
+- Harlow
+- Harrogate
+- Harrow
+- Hart
+- Hartlepool
+- Hastings
+- Havant
+- Havering
+- Herefordshire
+- Herefordshire, County of
+- Hertsmere
+- High Peak
+- Highland
+- Hillingdon
+- Hinckley & Bosworth
+- Hinckley and Bosworth
+- Horsham
+- Hounslow
+- Huntingdonshire
+- Hyndburn
+- Inverclyde
+- Ipswich
+- Isle of Anglesey
+- Isle of Wight
+- Isles of Scilly
+- Islington
+- Kennet
+- Kensington & Chelsea
+- Kensington and Chelsea
+- Kerrier
+- Kettering
+- King's Lynn and West Norfolk
+- Kings Lynn & West Norfolk
+- Kingston upon Hull, City of
+- Kingston upon Thames
+- Kirklees
+- Knowsley
+- Lambeth
+- Lancaster
+- Larne
+- Leeds
+- Leicester
+- Lewes
+- Lewisham
+- Lichfield
+- Limavady
+- Lincoln
+- Lisburn
+- Liverpool
+- Luton
+- Macclesfield
+- Magherafelt
+- Maidstone
+- Maldon
+- Malvern Hills
+- Manchester
+- Mansfield
+- Medway
+- Melton
+- Mendip
+- Merthyr Tydfil
+- Merton
+- Mid Bedfordshire
+- Mid Devon
+- Mid Suffolk
+- Mid Sussex
+- Middlesbrough
+- Midlothian
+- Milton Keynes
+- Mole Valley
+- Monmouthshire
+- Moray
+- Moyle
+- N IRELAND
+- Neath Port Talbot
+- New Forest
+- Newark & Sherwood
+- Newark and Sherwood
+- Newcastle upon Tyne
+- Newcastle-under-Lyme
+- Newham
+- Newport
+- Newry and Mourne
+- Newtownabbey
+- North Ayrshire
+- North Cornwall
+- North Devon
+- North Dorset
+- North Down
+- North East Derbyshire
+- North East Lincolnshire
+- North Hertfordshire
+- North Kesteven
+- North Lanarkshire
+- North Lincolnshire
+- North Norfolk
+- North Shropshire
+- North Somerset
+- North Tyneside
+- North Warwickshire
+- North West Leicestershire
+- North Wiltshire
+- Northampton
+- Norwich
+- Nottingham
+- Nuneaton & Bedworth
+- Nuneaton and Bedworth
+- Oadby & Wigston
+- Oadby and Wigston
+- Oldham
+- Omagh
+- Orkney Islands
+- Oswestry
+- Oxford
+- Pembrokeshire
+- Pendle
+- Penwith
+- Perth & Kinross
+- Peterborough
+- Plymouth
+- Poole
+- Portsmouth
+- Powys
+- Preston
+- Purbeck
+- Reading
+- Redbridge
+- Redcar & Cleveland
+- Redcar and Cleveland
+- Redditch
+- Reigate & Banstead
+- Reigate and Banstead
+- Renfrewshire
+- Restormel
+- Rhondda, Cynon, Taff
+- Ribble Valley
+- Richmond upon Thames
+- Richmondshire
+- Rochdale
+- Rochford
+- Rossendale
+- Rother
+- Rotherham
+- Rugby
+- Runnymede
+- Rushcliffe
+- Rushmoor
+- Rutland
+- Ryedale
+- SCOTLAND
+- Salford
+- Salisbury
+- Sandwell
+- Scarborough
+- Scottish Borders
+- Sedgefield
+- Sedgemoor
+- Sefton
+- Selby
+- Sevenoaks
+- Sheffield
+- Shepway
+- Shetland Islands
+- Shrewsbury & Atcham
+- Shrewsbury and Atcham
+- Slough
+- Solihull
+- South Ayrshire
+- South Bedfordshire
+- South Bucks
+- South Cambridgeshire
+- South Derbyshire
+- South Gloucestershire
+- South Hams
+- South Holland
+- South Kesteven
+- South Lakeland
+- South Lanarkshire
+- South Norfolk
+- South Northamptonshire
+- South Oxfordshire
+- South Ribble
+- South Shropshire
+- South Somerset
+- South Staffordshire
+- South Tyneside
+- Southampton
+- Southend
+- Southend-on-Sea
+- Southwark
+- Spelthorne
+- St Albans
+- St Edmundsbury
+- St Helens
+- St. Helens
+- Stafford
+- Staffordshire Moorlands
+- Stevenage
+- Stirling
+- Stockport
+- Stockton-on-Tees
+- Stoke-on-Trent
+- Strabane
+- Stratford-on-Avon
+- Stroud
+- Suffolk Coastal
+- Sunderland
+- Surrey Heath
+- Sutton
+- Swale
+- Swansea
+- Swindon
+- Tameside
+- Tamworth
+- Tandridge
+- Taunton Deane
+- Teesdale
+- Teignbridge
+- Telford and Wrekin
+- Tendring
+- Test Valley
+- Tewkesbury
+- Thanet
+- The Vale of Glamorgan
+- Three Rivers
+- Thurrock
+- Tonbridge & Malling
+- Tonbridge and Malling
+- Torbay
+- Torfaen
+- Torridge
+- Tower Hamlets
+- Trafford
+- Tunbridge Wells
+- Tynedale
+- UK
+- Uttlesford
+- Vale Royal
+- Vale of White Horse
+- WALES
+- Wakefield
+- Walsall
+- Waltham Forest
+- Wandsworth
+- Wansbeck
+- Warrington
+- Warwick
+- Watford
+- Waveney
+- Waverley
+- Wealden
+- Wear Valley
+- Wellingborough
+- Welwyn Hatfield
+- West Berkshire
+- West Devon
+- West Dorset
+- West Dunbartonshire
+- West Lancashire
+- West Lindsey
+- West Lothian
+- West Oxfordshire
+- West Somerset
+- West Wiltshire
+- Westminster
+- Weymouth & Portland
+- Weymouth and Portland
+- Wigan
+- Winchester
+- Windsor and Maidenhead
+- Wirral
+- Woking
+- Wokingham
+- Wolverhampton
+- Worcester
+- Worthing
+- Wrexham
+- Wychavon
+- Wycombe
+- Wyre
+- Wyre Forest
+- York

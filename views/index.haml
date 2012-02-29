@@ -1,0 +1,12 @@
+Small area estimation for disabilities in the UK. Send a GET request to url /{area}/{disability}{year}.
+%form{:action => "run", :method => "post"}
+  %select{:name=>"zone"}
+    - zones.each do |i|
+      %option{:value => i}= i
+  %select{:name=>"year"}
+    - years.each do |i|
+      %option{:value => i}= i
+  %select{:name=>"disability"}
+    - disabilities.each do |i|
+      %option{:value => i}= i
+  %input{:type => "submit", :value => "Run"}

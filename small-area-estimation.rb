@@ -46,6 +46,12 @@ $server_uri = nil
 $workflow = nil
 #the data used by the workflow
 $data = nil
+#all the years that the data file covers
+$years = nil
+#all the districts/zones that the data file covers
+$zones = nil
+#all the disabilities
+$disabilities = nil
 
 # Initalise Conneg
 use(Rack::Conneg) { |conneg|
@@ -64,6 +70,9 @@ end
 def check_server()
   if (!defined?($server) || ($server == nil)) then
     settings = YAML.load_file(File.join(Dir.getwd(), "config.yaml"))
+    $years = YAML.load_file(File.join(Dir.getwd(), "data", "years.yaml"))
+    $zones = YAML.load_file(File.join(Dir.getwd(), "data", "zonenames.yaml"))
+    $disabilities = YAML.load_file(File.join(Dir.getwd(), "data", "disabilities.yaml"))
     if settings
       $server_uri = settings['server_uri']
       file = File.open(settings['workflow'], 'r')
@@ -82,7 +91,8 @@ def check_server()
 end
 
 get '/' do
-  "Small area estimation for disabilities in the UK. Send a GET request to url /{area}/{disability}{year}."
+  check_server
+  haml :index, :locals => {:zones => $zones, :years => $years, :disabilities => $disabilities}
 end
 
 #fetch the estimation results for the area, disability type and year
@@ -114,4 +124,34 @@ respond_to do |wants|
            error 406, "Not Acceptable" 
          }
       end
+  end
+#fetch the estimation results for the area, disability type and year
+#or use taverna to create the results 
+post '/run' do
+  check_server
+  run = T2Server::Run.create($server,$workflow)
+  run.set_input("disability", params[:disability])
+  run.set_input("district_in", params[:zone])
+  run.set_input("year_in", params[:year])
+  run.upload_input_file("data", $data)
+  run.start
+  run.wait
+  #R/taverna returns results with leading/trailing [] so remove them
+  disability_total = run.get_output("disab_tot")[1..-1].chop
+  population_total = run.get_output("pop_tot")[1..-1].chop
+  percentage = run.get_output("pct")[1..-1].chop
+  respond_to do |wants|
+    wants.xml   {
+    content_type "application/xml"
+    builder :estimate, :locals => {:area => params[:zone], :disability => params[:disability], :year => params[:year], :disab_total => disability_total, :pop_total => population_total, :percentage => percentage}
+    }
+    wants.html {
+    content_type 'text/html'
+    haml :estimate, :locals => {:area => params[:zone], :disability => params[:disability], :year => params[:year], :disab_total => disability_total, :pop_total => population_total, :percentage => percentage}
+    }
+    wants.other { 
+    content_type 'text/plain'
+    error 406, "Not Acceptable" 
+    }
+  end
 end
