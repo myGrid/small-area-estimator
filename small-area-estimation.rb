@@ -75,9 +75,9 @@ def check_server()
     $disabilities = YAML.load_file(File.join(Dir.getwd(), "data", "disabilities.yaml"))
     if settings
       $server_uri = settings['server_uri']
-      file = File.open(settings['workflow'], 'r')
+      file = File.open(File.join(Dir.getwd(), "workflow", settings['workflow']), 'r')
       $workflow = file.read
-      $data = settings['data']
+      $data = File.join(Dir.getwd(), "data", settings['data'])
       begin
        $server = T2Server::Server.connect($server_uri)
       rescue Exception => e  

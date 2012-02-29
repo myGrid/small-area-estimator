@@ -2,6 +2,9 @@
 Based on Small Area Estimation available from http://www.ccsr.ac.uk/esds/data/
 Uses sinatra web service and taverna server along with R to produce estimates of population sizes for various disabilities up to 2031.
 
+== Setup
+Download data file from https://www.methodbox.org/data_extracts/402-census-and-hse-mix/download?type=CSV , unzip and place the csv file in data directory. Change the config.yaml workflow entry to be the data files name 
+
 == Author
 Ian Dunlop
 
