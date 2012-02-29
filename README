@@ -2,6 +2,9 @@
 Based on Small Area Estimation available from http://www.ccsr.ac.uk/esds/data/
 Uses sinatra web service and taverna server along with R to produce estimates of population sizes for various disabilities up to 2031.
 
+== Setup
+You will have to download taverna server from http://www.taverna.org.uk/download/server/ and set it up.  Make sure the path is set up correctly in the config.yaml file
+
 == Author
 Ian Dunlop
 
