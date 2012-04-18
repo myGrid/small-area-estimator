@@ -92,7 +92,7 @@ end
 
 get '/' do
   check_server
-  haml :index, :locals => {:zones => $zones, :years => $years, :disabilities => $disabilities}
+  haml :index, :locals => {:this_url => request.url, :zones => $zones, :years => $years, :disabilities => $disabilities}
 end
 
 #fetch the estimation results for the area, disability type and year
