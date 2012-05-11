@@ -2,16 +2,45 @@
 !!!
 %html
   %head
-    %title= "Disability estimator for UK districts"
-    == 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
+    %title="Disability estimator for UK districts"
+    == <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     == <link rel="shortcut icon" href="http://www.taverna.org.uk/pages/wp-content/themes/myGrid-Taverna/library/media/images/favicon.ico" />
     == <link rel="apple-touch-icon" href="http://www.taverna.org.uk/pages/wp-content/themes/myGrid-Taverna/library/media/images/iphone.png" />
+    == <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.1/build/cssgrids/cssgrids-min.css&3.5.1/build/cssfonts/cssfonts-min.css&3.5.1/build/cssreset/cssreset-min.css&3.5.1/build/cssbase/cssbase-min.css&3.5.1/build/node-menunav/assets/skins/sam/node-menunav.css" />
+    == <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    == <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.5.1/build/yui/yui-min.js&3.5.1/build/yui-base/yui-base-min.js&3.5.1/build/oop/oop-min.js&3.5.1/build/event-custom-base/event-custom-base-min.js&3.5.1/build/features/features-min.js&3.5.1/build/dom-core/dom-core-min.js&3.5.1/build/dom-base/dom-base-min.js&3.5.1/build/selector-native/selector-native-min.js&3.5.1/build/selector/selector-min.js&3.5.1/build/node-core/node-core-min.js&3.5.1/build/node-base/node-base-min.js&3.5.1/build/event-base/event-base-min.js&3.5.1/build/event-delegate/event-delegate-min.js&3.5.1/build/node-event-delegate/node-event-delegate-min.js&3.5.1/build/pluginhost-base/pluginhost-base-min.js&3.5.1/build/pluginhost-config/pluginhost-config-min.js&3.5.1/build/node-pluginhost/node-pluginhost-min.js&3.5.1/build/dom-style/dom-style-min.js&3.5.1/build/dom-screen/dom-screen-min.js&3.5.1/build/node-screen/node-screen-min.js&3.5.1/build/node-style/node-style-min.js&3.5.1/build/classnamemanager/classnamemanager-min.js"></script>
+    == <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.5.1/build/attribute-core/attribute-core-min.js&3.5.1/build/base-core/base-core-min.js&3.5.1/build/event-custom-complex/event-custom-complex-min.js&3.5.1/build/attribute-events/attribute-events-min.js&3.5.1/build/attribute-extras/attribute-extras-min.js&3.5.1/build/attribute-base/attribute-base-min.js&3.5.1/build/attribute-complex/attribute-complex-min.js&3.5.1/build/base-base/base-base-min.js&3.5.1/build/plugin/plugin-min.js&3.5.1/build/event-simulate/event-simulate-min.js&3.5.1/build/node-event-simulate/node-event-simulate-min.js&3.5.1/build/event-synthetic/event-synthetic-min.js&3.5.1/build/event-key/event-key-min.js&3.5.1/build/event-focus/event-focus-min.js&3.5.1/build/node-focusmanager/node-focusmanager-min.js&3.5.1/build/node-menunav/node-menunav-min.js"></script>
 
-  <!-- Combo-handled YUI CSS files: -->
-  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.9.0/build/reset-fonts-grids/reset-fonts-grids.css&2.9.0/build/base/base-min.css&2.9.0/build/assets/skins/sam/skin.css">
-  <!-- Combo-handled YUI JS files: -->
-  <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.9.0/build/yahoo-dom-event/yahoo-dom-event.js&2.9.0/build/element/element-min.js&2.9.0/build/container/container-min.js&2.9.0/build/menu/menu-min.js&2.9.0/build/button/button-min.js&2.9.0/build/connection/connection_core-min.js&2.9.0/build/cookie/cookie-min.js&2.9.0/build/datasource/datasource-min.js&2.9.0/build/paginator/paginator-min.js&2.9.0/build/datatable/datatable-min.js&2.9.0/build/json/json-min.js&2.9.0/build/tabview/tabview-min.js"></script>
-  %body
-    = yield
+  %body{:class=>"yui3-skin-sam"}
+    .yui-g
+      .yui3-u-1-8
+      .yui3-u-3-4
+        #wrapper
+          #hd{:role=>"banner"}
+            %a{:href=>"/", :id=>"home-link", :title=>"Return to home page", :class=>"left"}
+              %img{:src=>"images/neiss_logo.png" ,:alt=>"Return to home page"}
+            #header-text  
+              %h1 UK Disability Estimates
+            .clear
+          #productsandservices{:class=>"yui3-menu yui3-menu-horizontal"}
+            .yui3-menu-content
+              %ul
+                %li{:class=>"yui3-menuitem"}
+                  %a{:href=>"/", :title=>"Return to disability estimator home page", :class=>"yui3-menuitem-content"} Home
+                %li{:class=>"yui3-menuitem"}
+                  %a{:href=>"/map", :title=>"View UK disability map 2021", :class=>"yui3-menuitem-content"} Map
+        #bd{:role=>"main"}
+          = yield
+        #ft{:role=>"contentinfo"}
+          #box{:class=>"small-padding"}
+            %a{:href=>"http://methodbox.org", :title=>"Share and download survey data, scripts and more with MethodBox", :class=>"left"}
+              %img{:src=>"images/box_transparent_small.png" ,:alt=>"Methodbox logo"}
+          #grid{:class=>"small-padding"}
+            %a{:href=>"http://www.mygrid.org.uk", :id=>"home-link", :title=>"myGrid, home of the Taverna Workbench"}
+              %img{:src=>"images/logo-mygrid.png" ,:alt=>"myGrid logo"}
+    :javascript
+      YUI().use('node-menunav', function(Y) {
+        var menu = Y.one("#productsandservices");
+        menu.plug(Y.Plugin.NodeMenuNav);
+      });
 

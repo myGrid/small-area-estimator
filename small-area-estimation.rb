@@ -95,35 +95,39 @@ get '/' do
   haml :index, :locals => {:this_url => request.url, :zones => $zones, :years => $years, :disabilities => $disabilities}
 end
 
+get '/map' do
+  haml :map
+end
+
 #fetch the estimation results for the area, disability type and year
 #or use taverna to create the results 
 get '/:area/:disability/:year' do
-check_server
-run = T2Server::Run.create($server,$workflow)
-run.set_input("disability", params[:disability])
-run.set_input("district_in", params[:area])
-run.set_input("year_in", params[:year])
-run.upload_input_file("data", $data)
-run.start
-run.wait
-#R/taverna returns results with leading/trailing [] so remove them
-disability_total = run.get_output("disab_tot")[1..-1].chop
-population_total = run.get_output("pop_tot")[1..-1].chop
-percentage = run.get_output("pct")[1..-1].chop
-respond_to do |wants|
-         wants.xml   {
-            content_type "application/xml"
-            builder :estimate, :locals => {:area => params[:area], :disability => params[:disability], :year => params[:year], :disab_total => disability_total, :pop_total => population_total, :percentage => percentage}
-         }
-         wants.html {
-            content_type 'text/html'
-            haml :estimate, :locals => {:area => params[:area], :disability => params[:disability], :year => params[:year], :disab_total => disability_total, :pop_total => population_total, :percentage => percentage}
-         }
-         wants.other { 
-           content_type 'text/plain'
-           error 406, "Not Acceptable" 
-         }
-      end
+  check_server
+  run = T2Server::Run.create($server,$workflow)
+  run.set_input("disability", params[:disability])
+  run.set_input("district_in", params[:area])
+  run.set_input("year_in", params[:year])
+  run.upload_input_file("data", $data)
+  run.start
+  run.wait
+  #R/taverna returns results with leading/trailing [] so remove them
+  disability_total = run.get_output("disab_tot")[1..-1].chop.to_f.round
+  population_total = run.get_output("pop_tot")[1..-1].chop.to_f.round
+  percentage = (run.get_output("pct")[1..-1].chop.to_f * 100).round / 100.0
+  respond_to do |wants|
+    wants.xml {
+      content_type "application/xml"
+      builder :estimate, :locals => {:area => params[:area], :disability => params[:disability], :year => params[:year], :disab_total => disability_total, :pop_total => population_total, :percentage => percentage}
+    }
+    wants.html {
+      content_type 'text/html'
+      haml :estimate, :locals => {:area => params[:area], :disability => params[:disability], :year => params[:year], :disab_total => disability_total, :pop_total => population_total, :percentage => percentage}
+    }
+    wants.other { 
+      content_type 'text/plain'
+      error 406, "Not Acceptable" 
+    }
+    end
   end
 #fetch the estimation results for the area, disability type and year
 #or use taverna to create the results 
@@ -137,21 +141,21 @@ post '/run' do
   run.start
   run.wait
   #R/taverna returns results with leading/trailing [] so remove them
-  disability_total = run.get_output("disab_tot")[1..-1].chop
-  population_total = run.get_output("pop_tot")[1..-1].chop
-  percentage = run.get_output("pct")[1..-1].chop
+  disability_total = run.get_output("disab_tot")[1..-1].chop.to_f.round
+  population_total = run.get_output("pop_tot")[1..-1].chop.to_f.round
+  percentage = (run.get_output("pct")[1..-1].chop.to_f * 100).round / 100.0
   respond_to do |wants|
-    wants.xml   {
-    content_type "application/xml"
-    builder :estimate, :locals => {:area => params[:zone], :disability => params[:disability], :year => params[:year], :disab_total => disability_total, :pop_total => population_total, :percentage => percentage}
+    wants.xml {
+      content_type "application/xml"
+      builder :estimate, :locals => {:area => params[:zone], :disability => params[:disability], :year => params[:year], :disab_total => disability_total, :pop_total => population_total, :percentage => percentage}
     }
     wants.html {
-    content_type 'text/html'
-    haml :estimate, :locals => {:area => params[:zone], :disability => params[:disability], :year => params[:year], :disab_total => disability_total, :pop_total => population_total, :percentage => percentage}
+      content_type 'text/html'
+      haml :estimate, :locals => {:area => params[:zone], :disability => params[:disability], :year => params[:year], :disab_total => disability_total, :pop_total => population_total, :percentage => percentage}
     }
     wants.other { 
-    content_type 'text/plain'
-    error 406, "Not Acceptable" 
+      content_type 'text/plain'
+      error 406, "Not Acceptable" 
     }
   end
 end
