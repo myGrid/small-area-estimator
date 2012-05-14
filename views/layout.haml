@@ -22,7 +22,7 @@
             #header-text  
               %h1 UK Disability Estimates
             .clear
-          #productsandservices{:class=>"yui3-menu yui3-menu-horizontal"}
+          #navigationitems{:class=>"yui3-menu yui3-menu-horizontal"}
             .yui3-menu-content
               %ul
                 %li{:class=>"yui3-menuitem"}
@@ -40,7 +40,6 @@
               %img{:src=>"images/logo-mygrid.png" ,:alt=>"myGrid logo"}
     :javascript
       YUI().use('node-menunav', function(Y) {
-        var menu = Y.one("#productsandservices");
+        var menu = Y.one("#navigationitems");
         menu.plug(Y.Plugin.NodeMenuNav);
       });
-
