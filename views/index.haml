@@ -1,5 +1,5 @@
 %center
-  For REST service send a GET request to #{request.url}{area}/{disability}{year}.
+  Select a zone, year and disability and click 'Run'
   %form{:action => "run", :method => "post"}
     %select{:name=>"zone"}
       - zones.each do |i|
@@ -11,3 +11,8 @@
       - disabilities.each do |i|
         %option{:value => i}= i
     %input{:type => "submit", :value => "Run"}
+  %BR
+  For REST service send a GET request to #{request.url}{area}/{disability}{year}.
+  %BR
+  Or download the data for 2021 from 
+  %a(href="https://www.methodbox.org/Data_File/458-2021-uk-disability-estimates/download") MethodBox
