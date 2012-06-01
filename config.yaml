@@ -2,3 +2,5 @@
 data : census_and_hse.csv
 workflow : disab-estimator.t2flow
 server_uri : http://127.0.0.1:8080/taverna-server
+username : taverna
+password : taverna

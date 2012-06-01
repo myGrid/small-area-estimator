@@ -36,7 +36,7 @@ require 'sinatra'
 require 'haml'
 require 'builder'
 require 'rack/conneg'
-require 't2server'
+require 't2-server'
 
 #a taverna server instance
 $server = nil
@@ -68,31 +68,27 @@ before do
 end
 
 def check_server()
-  if (!defined?($server) || ($server == nil)) then
-    settings = YAML.load_file(File.join(Dir.getwd(), "config.yaml"))
-    $years = YAML.load_file(File.join(Dir.getwd(), "data", "years.yaml"))
-    $zones = YAML.load_file(File.join(Dir.getwd(), "data", "zonenames.yaml"))
-    $disabilities = YAML.load_file(File.join(Dir.getwd(), "data", "disabilities.yaml"))
-    if settings
-      $server_uri = settings['server_uri']
-      file = File.open(File.join(Dir.getwd(), "workflow", settings['workflow']), 'r')
-      $workflow = file.read
-      $data = File.join(Dir.getwd(), "data", settings['data'])
-      begin
-       $server = T2Server::Server.connect($server_uri)
-      rescue Exception => e  
-        $server = nil
-        redirect '/no_configuration'
-      end
-    else
-      redirect '/no_configuration'
-    end
-  end
+  settings = YAML.load_file(File.join(Dir.getwd(), "config.yaml"))
+  $years = YAML.load_file(File.join(Dir.getwd(), "data", "years.yaml"))
+  $zones = YAML.load_file(File.join(Dir.getwd(), "data", "zonenames.yaml"))
+  $disabilities = YAML.load_file(File.join(Dir.getwd(), "data", "disabilities.yaml"))
+  $username = settings['username']
+  $password = settings['password']
+  $credentials = T2Server::HttpBasic.new($username, $password)
+  $server_uri = settings['server_uri']
+  file = File.open(File.join(Dir.getwd(), "workflow", settings['workflow']), 'r')
+  $workflow = file.read
+  $data = File.join(Dir.getwd(), "data", settings['data'])
+  $server = T2Server::Server.new($server_uri)
 end
 
 get '/' do
-  check_server
-  haml :index, :locals => {:this_url => request.url, :zones => $zones, :years => $years, :disabilities => $disabilities}
+  begin
+   check_server
+   haml :index, :locals => {:this_url => request.url, :zones => $zones, :years => $years, :disabilities => $disabilities}
+  rescue Exception => $e
+    haml :no_configuration
+  end  
 end
 
 get '/map' do
@@ -103,17 +99,17 @@ end
 #or use taverna to create the results 
 get '/:area/:disability/:year' do
   check_server
-  run = T2Server::Run.create($server,$workflow)
-  run.set_input("disability", params[:disability])
-  run.set_input("district_in", params[:area])
-  run.set_input("year_in", params[:year])
-  run.upload_input_file("data", $data)
+  run = $server.create_run($workflow, $credentials)
+  run.input_port("disability").value = params[:disability]
+  run.input_port("district_in").value = params[:zone]
+  run.input_port("year_in").value = params[:year]
+  run.input_port("data").file = $data
   run.start
   run.wait
   #R/taverna returns results with leading/trailing [] so remove them
-  disability_total = run.get_output("disab_tot")[1..-1].chop.to_f.round
-  population_total = run.get_output("pop_tot")[1..-1].chop.to_f.round
-  percentage = (run.get_output("pct")[1..-1].chop.to_f * 100).round / 100.0
+  disability_total = run.output_port("disab_tot").value[1..-1].chop.to_f.round
+  population_total = run.output_port("pop_tot").value[1..-1].chop.to_f.round
+  percentage = (run.output_port("pct").value[1..-1].chop.to_f * 100).round / 100.0
   respond_to do |wants|
     wants.xml {
       content_type "application/xml"
@@ -133,17 +129,17 @@ get '/:area/:disability/:year' do
 #or use taverna to create the results 
 post '/run' do
   check_server
-  run = T2Server::Run.create($server,$workflow)
-  run.set_input("disability", params[:disability])
-  run.set_input("district_in", params[:zone])
-  run.set_input("year_in", params[:year])
-  run.upload_input_file("data", $data)
+  run = $server.create_run($workflow, $credentials)
+  run.input_port("disability").value = params[:disability]
+  run.input_port("district_in").value = params[:zone]
+  run.input_port("year_in").value = params[:year]
+  run.input_port("data").file = $data
   run.start
   run.wait
   #R/taverna returns results with leading/trailing [] so remove them
-  disability_total = run.get_output("disab_tot")[1..-1].chop.to_f.round
-  population_total = run.get_output("pop_tot")[1..-1].chop.to_f.round
-  percentage = (run.get_output("pct")[1..-1].chop.to_f * 100).round / 100.0
+  disability_total = run.output_port("disab_tot").value[1..-1].chop.to_f.round
+  population_total = run.output_port("pop_tot").value[1..-1].chop.to_f.round
+  percentage = (run.output_port("pct").value[1..-1].chop.to_f * 100).round / 100.0
   respond_to do |wants|
     wants.xml {
       content_type "application/xml"
